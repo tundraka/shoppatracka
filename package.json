@@ -1,0 +1,23 @@
+{
+  "name": "shoppatracka",
+  "version": "1.0.0",
+  "description": "Shoppatracka bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tundraka/shoppatracka.git"
+  },
+  "keywords": [
+    "Shoppatracka",
+    "bot"
+  ],
+  "author": "tundraka",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tundraka/shoppatracka/issues"
+  },
+  "homepage": "https://github.com/tundraka/shoppatracka"
+}

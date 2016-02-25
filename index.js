@@ -6,136 +6,120 @@
             \/_____/   \/_____/     \/_/   \/_/\/_/   \/_/     \/_/
 
 
-This is a sample Slack Button application that adds a bot to one or many slack teams.
+This is a sample Slack bot built with Botkit.
 
-# RUN THE APP:
-  Create a Slack app. Make sure to configure the bot user!
-    -> https://api.slack.com/applications/new
+This bot demonstrates many of the core features of Botkit:
+
+* Connect to Slack using the real time API
+* Receive messages based on "spoken" patterns
+* Send a message with attachments
+* Send a message via direct message (instead of in a public channel)
+
+# RUN THE BOT:
+
+  Get a Bot token from Slack:
+
+    -> http://my.slack.com/services/new/bot
+
   Run your bot from the command line:
-    clientId=<my client id> clientSecret=<my client secret> port=3000 node slackbutton_bot.js
-# USE THE APP
-  Add the app to your Slack by visiting the login page:
-    -> http://localhost:3000/login
-  After you've added the app, try talking to your bot!
-# EXTEND THE APP:
+
+    token=<MY TOKEN> node demo_bot.js
+
+# USE THE BOT:
+
+  Find your bot inside Slack to send it a direct message.
+
+  Say: "Hello"
+
+  The bot will reply "Hello!"
+
+  Say: "Attach"
+
+  The bot will send a message with a multi-field attachment.
+
+  Send: "dm"
+
+  The bot will reply with a direct message.
+
+  Make sure to invite your bot into other channels using /invite @<my bot>!
+
+# EXTEND THE BOT:
+
   Botkit is has many features for building cool and useful bots!
+
   Read all about it here:
+
     -> http://howdy.ai/botkit
+
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-/* Uses the slack button feature to offer a real time bot to multiple teams */
-var Botkit = require('../lib/Botkit.js');
+var Botkit = require('botkit');
 
-if (!process.env.clientId || !process.env.clientSecret || !process.env.port) {
-  console.log('Error: Specify clientId clientSecret and port in environment');
+if (!process.env.token) {
+  console.log('Error: Specify token in environment');
   process.exit(1);
 }
 
+var controller = Botkit.slackbot({debug: false});
 
-var controller = Botkit.slackbot({
-  json_file_store: './db_slackbutton_bot/',
-}).configureSlackApp(
-  {
-    clientId: process.env.clientId,
-    clientSecret: process.env.clientSecret,
-    scopes: ['bot'],
-  }
-);
-
-controller.setupWebserver(process.env.port,function(err,webserver) {
-  controller.createWebhookEndpoints(controller.webserver);
-
-  controller.createOauthEndpoints(controller.webserver,function(err,req,res) {
-    if (err) {
-      res.status(500).send('ERROR: ' + err);
-    } else {
-      res.send('Success!');
-    }
-  });
-});
-
-
-// just a simple way to make sure we don't
-// connect to the RTM twice for the same team
-var _bots = {};
-function trackBot(bot) {
-  _bots[bot.config.token] = bot;
-}
-
-controller.on('create_bot',function(bot,config) {
-
-  if (_bots[bot.config.token]) {
-    // already online! do nothing.
-  } else {
-    bot.startRTM(function(err) {
-
-      if (!err) {
-        trackBot(bot);
-      }
-
-      bot.startPrivateConversation({user: config.createdBy},function(err,convo) {
-        if (err) {
-          console.log(err);
-        } else {
-          convo.say('I am a bot that has just joined your team');
-          convo.say('You must now /invite me to a channel so that I can be of use!');
-        }
-      });
-
-    });
-  }
-
-});
-
-
-// Handle events related to the websocket connection to Slack
-controller.on('rtm_open',function(bot) {
-  console.log('** The RTM api just connected!');
-});
-
-controller.on('rtm_close',function(bot) {
-  console.log('** The RTM api just closed');
-  // you may want to attempt to re-open
-});
-
-controller.hears('hello','direct_message',function(bot,message) {
-  bot.reply(message,'Hello!');
-});
-
-controller.hears('^stop','direct_message',function(bot,message) {
-  bot.reply(message,'Goodbye');
-  bot.rtm.close();
-});
-
-controller.on(['direct_message','mention','direct_mention'],function(bot,message) {
-  bot.api.reactions.add({
-    timestamp: message.ts,
-    channel: message.channel,
-    name: 'robot_face',
-  },function(err) {
-    if (err) { console.log(err) }
-    bot.reply(message,'I heard you loud and clear boss.');
-  });
-});
-
-controller.storage.teams.all(function(err,teams) {
-
+controller.spawn({
+  token: process.env.token
+}).startRTM(function(err) {
   if (err) {
     throw new Error(err);
   }
+});
 
-  // connect all teams with bots up to slack!
-  for (var t  in teams) {
-    if (teams[t].bot) {
-      var bot = controller.spawn(teams[t]).startRTM(function(err) {
-        if (err) {
-          console.log('Error connecting bot to Slack:',err);
-        } else {
-          trackBot(bot);
-        }
-      });
-    }
-  }
+
+controller.hears(['hello','hi'],['direct_message','direct_mention','mention'],function(bot,message) {
+    bot.reply(message,"Hello.");
+});
+
+controller.hears(['attach'],['direct_message','direct_mention'],function(bot,message) {
+
+  var attachments = [];
+  var attachment = {
+    title: 'This is an attachment',
+    color: '#FFCC99',
+    fields: [],
+  };
+
+  attachment.fields.push({
+    label: 'Field',
+    value: 'A longish value',
+    short: false,
+  });
+
+  attachment.fields.push({
+    label: 'Field',
+    value: 'Value',
+    short: true,
+  });
+
+  attachment.fields.push({
+    label: 'Field',
+    value: 'Value',
+    short: true,
+  });
+
+  attachments.push(attachment);
+
+  bot.reply(message,{
+    text: 'See below...',
+    attachments: attachments,
+  },function(err,resp) {
+    console.log(err,resp);
+  });
+});
+
+controller.hears(['dm me'],['direct_message','direct_mention'],function(bot,message) {
+  bot.startConversation(message,function(err,convo) {
+    convo.say('Heard ya');
+  });
+
+  bot.startPrivateConversation(message,function(err,dm) {
+    dm.say('Private reply!');
+  });
 
 });
 

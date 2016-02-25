@@ -19,5 +19,9 @@
   "bugs": {
     "url": "https://github.com/tundraka/shoppatracka/issues"
   },
-  "homepage": "https://github.com/tundraka/shoppatracka"
+  "homepage": "https://github.com/tundraka/shoppatracka",
+  "dependencies": {
+    "botkit": "0.0.7",
+    "forecastio": "^1.0.1"
+  }
 }

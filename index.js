@@ -23,12 +23,8 @@ controller.spawn({
   }
 });
 
-
-controller.hears(['hello','hi'],['direct_message','direct_mention','mention'], (bot,message) => {
-    bot.reply(message,"Hello.");
-});
-
 controller.hears(['weather'],['direct_message', 'direct_mention', 'mention'], (bot, message) => {
+    bot.reply(message,"Hello.");
 });
 
 controller.hears(['dm me'],['direct_message','direct_mention'],function(bot,message) {

@@ -22,7 +22,7 @@ controller.hears(['weather'],['direct_message', 'direct_mention', 'mention'], (b
 
     forecastIo.fetch(coordinates.lat, coordinates.lng).
         then((result) => {
-        var description = resutl.hourly.summary;
+        var description = result.hourly.summary;
         var temperature = result.currently.temperature;
         var windSpeed = result.currently.windSpeed;
         var windDirection = result.currently.windBearing;

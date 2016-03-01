@@ -7,8 +7,6 @@ var forecastIo = new ForecastIo({
     key: process.env.forecastiokey,
     timeout: 2500
 });
-var austinlat = '30.267153';
-var austinlong = '-97.743061';
 
 // What will be the temperature ~5pm?
 // What's the weather like right now
@@ -23,12 +21,4 @@ var austinlong = '-97.743061';
 // windSpeed: result.currently.windSpeed
 // windDirection: result.currently.windBearing
 
-forecastIo.fetch(austinlat, austinlong)
-    .then(function(result) {
-        console.log(result);
-        console.log(JSON.stringify(result));
-    })
-    .catch(function(error) {
-        console.log(error);
-        console.log(JSON.stringify(error));
-    });
+module.exports = forecastIo;

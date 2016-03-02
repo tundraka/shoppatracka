@@ -20,13 +20,15 @@ controller.spawn({
 controller.hears(['weather'],['direct_message', 'direct_mention', 'mention'], (bot, message) => {
     var coordinates = location.getCoordinatesByPlaceName('austin');
 
+    bot.reply(message, 'Working on it!');
+
     forecastIo.fetch(coordinates.lat, coordinates.lng).
         then((result) => {
         var description = result.hourly.summary;
         var temperature = result.currently.temperature;
         var windSpeed = result.currently.windSpeed;
         var windDirection = result.currently.windBearing;
-        var botReply = `It is ${temperature}, ${description}, wind sppe of ${windSpeed} towards ${windDirection}`;
+        var botReply = `It is ${temperature} F, ${description} Wind speed of ${windSpeed} mph towards ${windDirection}`;
         
         bot.reply(message, botReply);
     }).

@@ -1,5 +1,6 @@
-var bearings = ['N', 'NE', 'NE', 'E', 'E', 'SE', 'SE', 'S', 'S', 'SW', 'SW', 'W',
-    'W', 'NW', 'NW' , 'N'];
+var names = ['North', 'North-East', 'East', 'South-East', 'South', 'South-West',
+    'West'];
+var bearings = [0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 0];
 var angleDivision = 23;
 
 module.exports = function getBearingFromAngle(bearing) {
@@ -7,5 +8,5 @@ module.exports = function getBearingFromAngle(bearing) {
         return 'I don\'t know (${bearing}?)';
     }
 
-    return bearings[Math.floor(bearing / angleDivision)];
+    return names[bearings[Math.floor(bearing / angleDivision)]];
 };

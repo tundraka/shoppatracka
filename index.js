@@ -2,6 +2,7 @@ var Botkit = require('botkit');
 var forecastIo = require('./forecast');
 var location = require('./location');
 var getBearingFromAngle = require('./bearing');
+var temperature = require('./temperature');
 
 if (!process.env.token || !process.env.forecastiokey) {
   console.log('Error: Specify: token | forecastiokey. In environment');
@@ -26,11 +27,12 @@ controller.hears(['weather'],['direct_message', 'direct_mention', 'mention'], (b
     forecastIo.fetch(coordinates.lat, coordinates.lng).
         then((result) => {
         var description = result.hourly.summary;
-        var temperature = result.currently.temperature;
+        var farenheit = result.currently.temperature;
+        var celsius = temperature.f2c(farenheit);
         var windSpeed = result.currently.windSpeed;
         var windDirection = result.currently.windBearing;
         var bearingName = getBearingFromAngle(windDirection);
-        var botReply = `It is ${temperature} F, ${description} Wind speed of ${windSpeed} mph towards ${bearingName}`;
+        var botReply = `It is ${farenheit} F (${celsius} C), ${description} Wind speed of ${windSpeed} mph towards ${bearingName}`;
         
         bot.reply(message, botReply);
     }).

@@ -28,7 +28,7 @@ controller.hears(['weather'],['direct_message', 'direct_mention', 'mention'], (b
         then((result) => {
         var description = result.hourly.summary;
         var farenheit = result.currently.temperature;
-        var celsius = temperature.f2c(farenheit);
+        var celsius = Math.round(temperature.f2c(farenheit));
         var windSpeed = result.currently.windSpeed;
         var windDirection = result.currently.windBearing;
         var bearingName = getBearingFromAngle(windDirection);

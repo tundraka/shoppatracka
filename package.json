@@ -22,6 +22,7 @@
   "homepage": "https://github.com/tundraka/shoppatracka",
   "dependencies": {
     "botkit": "0.0.7",
-    "forecast.io-bluebird": "0.0.1"
+    "forecast.io-bluebird": "0.0.1",
+    "shipping-ups": "^0.5.3"
   }
 }

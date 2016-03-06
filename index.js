@@ -3,6 +3,9 @@ var forecastIo = require('./forecast');
 var location = require('./location');
 var getBearingFromAngle = require('./bearing');
 var temperature = require('./temperature');
+var ups = require('./ups');
+
+var botMention = ['direct_message', 'direct_mention', 'mention'];
 
 if (!process.env.token || !process.env.forecastiokey) {
   console.log('Error: Specify: token | forecastiokey. In environment');
@@ -19,7 +22,7 @@ controller.spawn({
   }
 });
 
-controller.hears(['weather'],['direct_message', 'direct_mention', 'mention'], (bot, message) => {
+controller.hears(['weather'], botMention, (bot, message) => {
     var coordinates = location.getCoordinatesByPlaceName('austin');
 
     bot.reply(message, 'Working on it!');
@@ -45,7 +48,12 @@ controller.hears(['weather'],['direct_message', 'direct_mention', 'mention'], (b
 
 });
 
-controller.hears(['dm me'],['direct_message','direct_mention'],function(bot,message) {
+controller.hears('track (\w+)$', botMention,  (bot, message) {
+     var trackingNumer = message.match[1];
+    bot.reply(`ok, will track ${trackingNumer}`);
+});
+
+controller.hears(['dm me'], botMention,function(bot,message) {
   bot.startConversation(message,function(err,convo) {
     convo.say('Heard ya');
   });

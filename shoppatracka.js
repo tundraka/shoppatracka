@@ -47,7 +47,7 @@ controller.hears(['weather'], botMention, (bot, message) => {
     });
 });
 
-controller.hears('track (\w+)$', botMention,  (bot, message) {
+controller.hears('track (\w+)$', botMention,  (bot, message) => {
      var trackingNumer = message.match[1];
     bot.reply(`ok, will track ${trackingNumer}`);
 });

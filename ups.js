@@ -6,16 +6,16 @@ var upsApi = require('shipping-ups')({
     user_agent: 'shoppatracka 0.1'
 });
 
-upsApi.track('', (err, result) => {
-    if (err) {
-        console.log('error ' + err);
-        console.log(JSON.stringify(err));
-        return;
-    }
+//upsApi.track('', (err, result) => {
+    //if (err) {
+        //console.log('error ' + err);
+        //console.log(JSON.stringify(err));
+        //return;
+    //}
 
-    return {
-        // TODO.
-    };
-});
+    //return {
+        //// TODO.
+    //};
+//});
 
 module.exports = upsApi;

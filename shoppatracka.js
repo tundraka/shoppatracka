@@ -45,7 +45,6 @@ controller.hears(['weather'], botMention, (bot, message) => {
 
         bot.reply(message, 'Shade! Unable to fetch weather, please repeat the question.');
     });
-
 });
 
 controller.hears('track (\w+)$', botMention,  (bot, message) {

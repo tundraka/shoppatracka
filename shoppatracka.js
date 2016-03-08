@@ -47,19 +47,18 @@ controller.hears(['weather'], botMention, (bot, message) => {
     });
 });
 
-controller.hears('track (\w+)$', botMention,  (bot, message) => {
+controller.hears(['track (\w+)$'], botMention,  (bot, message) => {
      var trackingNumer = message.match[1];
     bot.reply(`ok, will track ${trackingNumer}`);
 });
 
 controller.hears(['dm me'], botMention,function(bot,message) {
-  bot.startConversation(message,function(err,convo) {
-    convo.say('Heard ya');
-  });
+    bot.startConversation(message,function(err,convo) {
+        convo.say('Heard ya');
+    });
 
-  bot.startPrivateConversation(message,function(err,dm) {
-    dm.say('Private reply!');
-  });
-
+    bot.startPrivateConversation(message,function(err,dm) {
+        dm.say('Private reply!');
+    });
 });
 

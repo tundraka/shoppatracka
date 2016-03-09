@@ -1,5 +1,9 @@
+'use strict';
+
 var Promise = require("bluebird");
-var upsApi = require('shipping-ups')({
+var UpsApi = require('shipping-ups');
+
+var upsApi = new UpsApi({
     environment: 'live',
     access_key: process.env.upsAccessKey,
     username: process.env.upsUserName,
@@ -7,20 +11,21 @@ var upsApi = require('shipping-ups')({
     user_agent: 'shoppatracka 0.1'
 });
 
+Promise.promisifyAll(upsApi);
+
 function trackPackage(trackingNumber) {
-    //upsApi.track(trackingNumber, 
+    return upsApi.trackAsync('1Z5466360394880552', {latest: true}).then((result) => {
+        console.log(JSON.stringify(result));
+    });
 }
 
-//upsApi.track('', (err, result) => {
-    //if (err) {
-        //console.log('error ' + err);
-        //console.log(JSON.stringify(err));
-        //return;
-    //}
+module.exports = {
+    trackPackage
+};
 
-    //return {
-        //// TODO.
-    //};
-//});
-
-module.exports = upsApi;
+trackPackage().then(() => {
+    console.log('hey');
+}).catch((err) => {
+    console.log('hey');
+    console.log(JSON.stringify(err));
+});

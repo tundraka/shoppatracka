@@ -14,8 +14,17 @@ var upsApi = new UpsApi({
 Promise.promisifyAll(upsApi);
 
 function trackPackage(trackingNumber) {
-    return upsApi.trackAsync('1Z5466360394880552', {latest: true}).then((result) => {
+    return upsApi.trackAsync('1Z5466360394880552o', {latest: true}).then((result) => {
         console.log(JSON.stringify(result));
+        // TODO. I'm not considering the case when the tracking code doesn't
+        // exist.
+        let activity = result.Shipment.Package.Activity;
+        if (Array.isArray(activity) && activity.length > 0) {
+            activity.date || '';
+            activity.time || '';
+        }
+    }).catch((e) => {
+        console.log(JSON.stringify(e));
     });
 }
 

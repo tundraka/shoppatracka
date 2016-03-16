@@ -17,14 +17,23 @@ function trackPackage(trackingNumber) {
     return upsApi.trackAsync(trackingNumber, {latest: true}).then((result) => {
         // TODO. I'm not considering the case when the tracking code doesn't
         // exist.
-        let activity = result.Shipment.Package.Activity;
-        if (Array.isArray(activity) && activity.length > 0) {
-            let date = activity.date || '';
-            let time = activity.time || '';
+        console.log(JSON.stringify(result));
+
+        let shipment = result.Shipment
+        let activity = shipment.Package.Activity;
+
+        if (activity) {
+            let date = activity.Date || '';
+            let time = activity.Time || '';
             let place = activity.ActivityLocation.Address.City || '';
+            let scheduledDelivery = shipment.ScheduledDeliveryDate;
             let statusCode = activity.Status.StatusType.Code || '';
             let statusDescription = activity.Status.StatusType.Description || '';
+
+            return `Last activity on ${date}-${time} at ${place}, ${statusDescription} scheduled delivery ${scheduledDelivery}`
         }
+
+        return 'no activity';
     });
 }
 
@@ -32,8 +41,8 @@ module.exports = {
     trackPackage
 };
 
-trackPackage('1Z5466360394880552').then(() => {
-    console.log('hey');
+trackPackage('').then((status) => {
+    console.log(status);
 }).catch((err) => {
     console.log('hey');
     console.log(JSON.stringify(err));

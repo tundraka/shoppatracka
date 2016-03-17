@@ -40,10 +40,3 @@ function trackPackage(trackingNumber) {
 module.exports = {
     trackPackage
 };
-
-trackPackage('').then((status) => {
-    console.log(status);
-}).catch((err) => {
-    console.log('hey');
-    console.log(JSON.stringify(err));
-});

@@ -1,9 +1,15 @@
+'use strict';
+
+const location = require('./location');
+const getBearingFromAngle = require('./bearing');
+const temperature = require('./temperature');
+
 // ForecastIO: https://github.com/timelessvirtues/forecast.io-bluebird
 // DarkSky API: https://developer.forecast.io/docs/v2#forecast_call
 // Key: https://developer.forecast.io/
 
-var ForecastIo = require('forecast.io-bluebird');
-var forecastIo = new ForecastIo({
+const ForecastIo = require('forecast.io-bluebird');
+let forecastIo = new ForecastIo({
     key: process.env.forecastiokey,
     timeout: 2500
 });
@@ -15,4 +21,19 @@ var forecastIo = new ForecastIo({
 // {It'll be | it is} 45F (35C), clear throughout the day, wind speed of 3.69 towards the
 // North
 
-module.exports = forecastIo;
+function getCurrentForecast() {
+    return forecast.fetch(coordinates.lat, coordinates.lng).then((result) => {
+        var description = result.hourly.summary;
+        var farenheit = result.currently.temperature;
+        var celsius = Math.round(temperature.f2c(farenheit));
+        var windSpeed = result.currently.windSpeed;
+        var windDirection = result.currently.windBearing;
+        var bearingName = getBearingFromAngle(windDirection);
+        
+        return `It is ${farenheit} F (${celsius} C), ${description} Wind speed of ${windSpeed} mph towards ${bearingName}`;
+    });
+}
+
+module.exports = {
+    getCurrentForecast
+};

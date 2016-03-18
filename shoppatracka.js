@@ -1,8 +1,7 @@
+'use strict';
+
 var Botkit = require('botkit');
-var forecastIo = require('./forecast');
-var location = require('./location');
-var getBearingFromAngle = require('./bearing');
-var temperature = require('./temperature');
+var forecast = require('./forecast');
 var ups = require('./ups');
 
 var botMention = ['direct_message', 'direct_mention', 'mention'];
@@ -27,7 +26,7 @@ controller.hears(['weather'], botMention, (bot, message) => {
 
     bot.reply(message, 'Working on it!');
 
-    forecastIo.fetch(coordinates.lat, coordinates.lng).
+    forecast.getCurrentForecastfetch(coordinates.lat, coordinates.lng).
         then((result) => {
         var description = result.hourly.summary;
         var farenheit = result.currently.temperature;

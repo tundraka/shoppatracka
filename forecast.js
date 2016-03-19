@@ -1,6 +1,5 @@
 'use strict';
 
-const location = require('./location');
 const getBearingFromAngle = require('./bearing');
 const temperature = require('./temperature');
 
@@ -21,14 +20,14 @@ let forecastIo = new ForecastIo({
 // {It'll be | it is} 45F (35C), clear throughout the day, wind speed of 3.69 towards the
 // North
 
-function getCurrentForecast() {
+function getCurrentForecast(coordinates) {
     return forecast.fetch(coordinates.lat, coordinates.lng).then((result) => {
-        var description = result.hourly.summary;
-        var farenheit = result.currently.temperature;
-        var celsius = Math.round(temperature.f2c(farenheit));
-        var windSpeed = result.currently.windSpeed;
-        var windDirection = result.currently.windBearing;
-        var bearingName = getBearingFromAngle(windDirection);
+        let description = result.hourly.summary;
+        let farenheit = result.currently.temperature;
+        let celsius = Math.round(temperature.f2c(farenheit));
+        let windSpeed = result.currently.windSpeed;
+        let windDirection = result.currently.windBearing;
+        let bearingName = getBearingFromAngle(windDirection);
         
         return `It is ${farenheit} F (${celsius} C), ${description} Wind speed of ${windSpeed} mph towards ${bearingName}`;
     });

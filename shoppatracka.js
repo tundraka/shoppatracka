@@ -1,10 +1,11 @@
 'use strict';
 
-var Botkit = require('botkit');
-var forecast = require('./forecast');
-var ups = require('./ups');
+const Botkit = require('botkit');
+const location = require('./location');
+const forecast = require('./forecast');
+const ups = require('./ups');
 
-var botMention = ['direct_message', 'direct_mention', 'mention'];
+const botMention = ['direct_message', 'direct_mention', 'mention'];
 
 if (!process.env.token || !process.env.forecastiokey) {
   console.log('Error: Specify: token | forecastiokey. In environment');
@@ -26,19 +27,9 @@ controller.hears(['weather'], botMention, (bot, message) => {
 
     bot.reply(message, 'Working on it!');
 
-    forecast.getCurrentForecastfetch(coordinates.lat, coordinates.lng).
-        then((result) => {
-        var description = result.hourly.summary;
-        var farenheit = result.currently.temperature;
-        var celsius = Math.round(temperature.f2c(farenheit));
-        var windSpeed = result.currently.windSpeed;
-        var windDirection = result.currently.windBearing;
-        var bearingName = getBearingFromAngle(windDirection);
-        var botReply = `It is ${farenheit} F (${celsius} C), ${description} Wind speed of ${windSpeed} mph towards ${bearingName}`;
-        
+    forecast.getCurrentForecastfetch(coordinates).then((result) => {
         bot.reply(message, botReply);
-    }).
-        catch((error) => {
+    }).catch((error) => {
         console.log('unable to fetch weather information');
         console.log(error);
 

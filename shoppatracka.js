@@ -27,8 +27,8 @@ controller.hears(['weather'], botMention, (bot, message) => {
 
     bot.reply(message, 'Working on it!');
 
-    forecast.getCurrentForecastfetch(coordinates).then((result) => {
-        bot.reply(message, botReply);
+    forecast.getCurrentForecast(coordinates).then((result) => {
+        bot.reply(message, result);
     }).catch((error) => {
         console.log('unable to fetch weather information');
         console.log(error);

@@ -21,7 +21,7 @@ let forecastIo = new ForecastIo({
 // North
 
 function getCurrentForecast(coordinates) {
-    return forecast.fetch(coordinates.lat, coordinates.lng).then((result) => {
+    return forecastIo.fetch(coordinates.lat, coordinates.lng).then((result) => {
         let description = result.hourly.summary;
         let farenheit = result.currently.temperature;
         let celsius = Math.round(temperature.f2c(farenheit));

@@ -12,9 +12,9 @@ if (!process.env.token || !process.env.forecastiokey) {
   process.exit(1);
 }
 
-var controller = Botkit.slackbot({debug: false});
+var shoppatracka = Botkit.slackbot({debug: false});
 
-controller.spawn({
+shoppatracka.spawn({
   token: process.env.token
 }).startRTM(function(err) {
   if (err) {
@@ -22,7 +22,7 @@ controller.spawn({
   }
 });
 
-controller.hears(['weather'], botMention, (bot, message) => {
+shoppatracka.hears(['weather'], botMention, (bot, message) => {
     var coordinates = location.getCoordinatesByPlaceName('austin');
 
     bot.reply(message, 'Working on it!');
@@ -37,7 +37,7 @@ controller.hears(['weather'], botMention, (bot, message) => {
     });
 });
 
-controller.hears(['track (\w+)$'], botMention, (bot, message) => {
+shoppatracka.hears(['track (\w+)$'], botMention, (bot, message) => {
     var trackingNumer = message.match[1];
 
     bot.reply(`ok, will track ${trackingNumer}`);
@@ -49,7 +49,7 @@ controller.hears(['track (\w+)$'], botMention, (bot, message) => {
     });
 });
 
-controller.hears(['dm me'], botMention,function(bot,message) {
+shoppatracka.hears(['dm me'], botMention,function(bot,message) {
     bot.startConversation(message,function(err,convo) {
         convo.say('Heard ya');
     });

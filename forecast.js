@@ -29,7 +29,7 @@ function getCurrentForecast(coordinates) {
         let windDirection = result.currently.windBearing;
         let bearingName = getBearingFromAngle(windDirection);
         
-        return `It is ${farenheit} F (${celsius} C), ${description} Wind speed of ${windSpeed} mph towards ${bearingName}`;
+        return `It is ${farenheit} F (${celsius} C), ${description} Wind speed of ${windSpeed} mph ${bearingName}`;
     });
 }
 

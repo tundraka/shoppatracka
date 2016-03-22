@@ -1,8 +1,6 @@
 'use strict';
 
 const Botkit = require('botkit');
-const location = require('./location');
-const forecast = require('./forecast');
 const ups = require('./ups');
 
 const botMention = ['direct_message', 'direct_mention', 'mention'];
@@ -23,19 +21,6 @@ shoppatracka.spawn({
 });
 
 shoppatracka.hears(['weather'], botMention, (bot, message) => {
-    var coordinates = location.getCoordinatesByPlaceName('austin');
-
-    bot.reply(message, 'Working on it!');
-
-    forecast.getCurrentForecast(coordinates).then((result) => {
-        bot.reply(message, result);
-    }).catch((error) => {
-        console.log('unable to fetch weather information');
-        console.log(error);
-
-        bot.reply(message, 'Shade! Unable to fetch weather, please repeat the question.');
-    });
-});
 
 shoppatracka.hears(['track (\w+)$'], botMention, (bot, message) => {
     var trackingNumer = message.match[1];

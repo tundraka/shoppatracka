@@ -1,7 +1,7 @@
 'use strict';
 
-const getBearingFromAngle = require('./bearing');
-const temperature = require('./temperature');
+const getBearingFromAngle = require('../utils/bearing');
+const temperature = require('../utils/temperature');
 
 // ForecastIO: https://github.com/timelessvirtues/forecast.io-bluebird
 // DarkSky API: https://developer.forecast.io/docs/v2#forecast_call

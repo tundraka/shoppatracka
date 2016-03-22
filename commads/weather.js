@@ -1,7 +1,7 @@
 'use strict';
 
-const location = require('./location');
-const forecast = require('./forecast');
+const location = require('../facades/location');
+const forecast = require('../facades/forecast');
 
 module.exports = {
     patterns: ['weather'],

@@ -2,6 +2,7 @@
 
 const commands = [
     require('./weather')
+    require('./ups')
 ];
 
 function init(bot) {

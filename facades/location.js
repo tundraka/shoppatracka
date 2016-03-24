@@ -1,3 +1,5 @@
+'use strict';
+
 // Everything goes to Austin.
 function getCoordinatesByPlaceName(placeName) {
     return {

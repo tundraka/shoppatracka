@@ -8,7 +8,7 @@ const temperature = require('../utils/temperature');
 // Key: https://developer.forecast.io/
 
 const ForecastIo = require('forecast.io-bluebird');
-let forecastIo = new ForecastIo({
+const forecastIo = new ForecastIo({
     key: process.env.forecastiokey,
     timeout: 2500
 });

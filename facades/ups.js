@@ -1,9 +1,9 @@
 'use strict';
 
-var Promise = require("bluebird");
-var UpsApi = require('shipping-ups');
+const Promise = require('bluebird');
+const UpsApi = require('shipping-ups');
 
-var upsApi = new UpsApi({
+const upsApi = new UpsApi({
     environment: 'live',
     access_key: process.env.upsAccessKey,
     username: process.env.upsUserName,
@@ -17,8 +17,6 @@ function trackPackage(trackingNumber) {
     return upsApi.trackAsync(trackingNumber, {latest: true}).then((result) => {
         // TODO. I'm not considering the case when the tracking code doesn't
         // exist.
-        console.log(JSON.stringify(result));
-
         let shipment = result.Shipment
         let activity = shipment.Package.Activity;
 

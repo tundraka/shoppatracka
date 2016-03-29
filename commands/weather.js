@@ -6,7 +6,7 @@ const forecast = require('../facades/forecast');
 module.exports = {
     patterns: ['weather'],
     messageType: ['direct_message', 'direct_mention', 'mention'],
-    callback: (bot, mention) => {
+    callback: (bot, message) => {
         var coordinates = location.getCoordinatesByPlaceName('austin');
 
         bot.reply(message, 'Working on it!');

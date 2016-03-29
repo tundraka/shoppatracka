@@ -7,7 +7,6 @@ const commands = [
 
 function init(bot) {
     commands.forEach((command) => {
-        console.log(bot);
         bot.hears(command.patterns, command.messageType, command.callback);
     });
 }

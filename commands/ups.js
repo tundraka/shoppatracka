@@ -3,9 +3,9 @@
 const ups = require('../facades/ups');
 
 module.exports = {
-    patterns: ['track (\w+)$'],
+    patterns: ['track (\w)$'],
     messageType: ['direct_message', 'direct_mention', 'mention'],
-    callback: (bot, mention) => {
+    callback: (bot, message) => {
         var trackingNumer = message.match[1];
 
         bot.reply(`ok, will track ${trackingNumer}`);

@@ -10,7 +10,7 @@ function validateParams() {
     }
 }
 
-function startBot() ) {
+function startBot() {
     let shoppatracka = Botkit.slackbot(botOptions);
 
     shoppatracka.spawn({
@@ -21,7 +21,7 @@ function startBot() ) {
         }
     });
 
-    return shopatracka;
+    return shoppatracka;
 }
 
 function start() {

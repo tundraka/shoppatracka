@@ -1,8 +1,11 @@
 'use strict';
 
+const weather = require('./weather');
+const ups = require('./ups');
+
 const commands = [
-    require('./weather'),
-    require('./ups')
+    weather,
+    ups
 ];
 
 function init(bot) {

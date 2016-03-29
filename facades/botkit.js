@@ -15,7 +15,7 @@ function startBot() {
 
     shoppatracka.spawn({
         token: process.env.token
-    }).startRTM(function(err) {
+    }).startRTM((err) => {
         if (err) {
             throw new Error(err);
         }

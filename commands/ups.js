@@ -6,9 +6,9 @@ module.exports = {
     patterns: ['track (\w)$'],
     messageType: ['direct_message', 'direct_mention', 'mention'],
     callback: (bot, message) => {
-        var trackingNumer = message.match[1];
+        let trackingNumber = message.match[1];
 
-        bot.reply(`ok, will track ${trackingNumer}`);
+        bot.reply(`ok, will track ${trackingNumber}`);
 
         ups.trackPackage(trackingNumber).then((trackingInfo) => {
             bot.reply(trackingInfo);

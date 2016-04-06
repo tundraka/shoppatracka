@@ -2,8 +2,19 @@
 
 const Promise = require('bluebird');
 const fs = Promise.promisifyAll(require('fs'));
+
 const constants = require('../utils/constants');
+
+const calendar = require('googleapis').calendar(constants.google.calendar.version);
 const googleAuth = require('google-auth-library');
+const calendarListConfiguration = {
+    auth: null, // define later
+    calendarId: constants.google.calendar.calendarid,
+    timeMin: (new Date()).toISOString(),
+    maxResults: 10,
+    singleEvents: true,
+    orderBy: 'startTime'
+};
 
 function getAuthInfo() {
     let creds = {};
@@ -14,9 +25,9 @@ function getAuthInfo() {
         return fs.readFileAsync(constants.google.tokens);
     }).then((content) => {
         const auth = new googleAuth();
-        let oauth2Client = new auth.OAuth2(content.secret.installed.clientId,
-                               content.secret.installed.clientSecret,
-                               content.secret.installed.redirectUrl);
+        let oauth2Client = new auth.OAuth2(creds.secret.installed.clientId,
+                               creds.secret.installed.clientSecret,
+                               creds.secret.installed.redirectUrl);
         oauth2Client.credentials = JSON.parse(content);
 
         return oauth2Client;
@@ -25,7 +36,9 @@ function getAuthInfo() {
 
 function getEvents() {
     getAuthInfo().then((authInfo) => {
+        //calendarListConfiguration.auth = authInfo;
     }).catch((err) => {
+        console.log(err);
     });
 }
 

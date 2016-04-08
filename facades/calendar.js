@@ -36,11 +36,25 @@ function getAuthInfo() {
 
 function getEvents() {
     getAuthInfo().then((authInfo) => {
-        //calendarListConfiguration.auth = authInfo;
+        calendarListConfiguration.auth = authInfo;
+        calendarListConfiguration.timeMin = (new Date()).toISOString();
+
+        calendar.events.list(calendarListConfiguration, (err, response) => {
+            if (err) {
+                console.log('events errors');
+                console.log(err);
+                return;
+            }
+
+            console.log(JSON.stringify(response));
+        });
     }).catch((err) => {
+        console.log('auth error');
         console.log(err);
     });
 }
+
+getEvents();
 
 module.exports = {
     getEvents

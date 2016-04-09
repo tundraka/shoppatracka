@@ -4,9 +4,9 @@ const Promise = require('bluebird');
 const fs = Promise.promisifyAll(require('fs'));
 
 const constants = require('../utils/constants');
+const moment = require('moment');
 
-const googleapis = require('googleapis');
-//const calendar = require('googleapis').calendar(constants.google.calendar.version);
+const events = Promise.promisifyAll(require('googleapis').calendar(constants.google.calendar.version).events);
 const googleAuth = require('google-auth-library');
 const calendarListConfiguration = {
     auth: null, // define later
@@ -36,28 +36,39 @@ function getAuthInfo() {
 }
 
 function getEvents() {
-    getAuthInfo().then((authInfo) => {
+    return getAuthInfo().then((authInfo) => {
         calendarListConfiguration.auth = authInfo;
         calendarListConfiguration.timeMin = (new Date()).toISOString();
 
-        let calendar = googleapis.calendar('v3');
-        calendar.events.list(calendarListConfiguration, (err, response) => {
         //calendar.calendarList.list({auth: authInfo}, (err, response) => {
-            if (err) {
-                console.log('events errors');
-                console.log(err);
-                return;
-            }
+        return events.listAsync(calendarListConfiguration);
+    }).then((response) => {
+        let calendarResult = {
+            summary: response.summary,
+            description: response.description,
+            items: []
+        };
 
-            console.log(JSON.stringify(response));
+        response.items.forEach((item) => {
+            calendarResult.items.push({
+                summary: item.summary,
+                when: moment(item.start.dateTime, moment.ISO_8601).format(constants.dates.defaultFormat)
+            });
         });
-    }).catch((err) => {
-        console.log('auth error');
-        console.log(err);
+
+        return calendarResult;
     });
 }
 
-getEvents();
+getEvents().then((result) => {
+    console.log(`${result.summary}:${result.description}`);
+    result.items.forEach((item) => {
+        console.log(`${item.summary} on ${item.when}`);
+    });
+}).catch((err) => {
+    console.log('auth error');
+    console.log(err);
+});
 
 module.exports = {
     getEvents

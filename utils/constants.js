@@ -9,6 +9,9 @@ const constants = {
             calendarid: process.env.google_calendarid, // primary
             scope: ['https://www.googleapis.com/auth/calendar.readonly']
         }
+    },
+    dates: {
+        defaultFormat: 'dddd [the] Do [at] LT' // "Sunday the 12th at 4:41 PM"
     }
 };
 

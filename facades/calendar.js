@@ -50,6 +50,9 @@ function getEvents() {
         };
 
         response.items.forEach((item) => {
+            if (item.start.hasOwnProperty('dateTime')) {
+            }
+
             calendarResult.items.push({
                 summary: item.summary,
                 when: moment(item.start.dateTime, moment.ISO_8601).format(constants.dates.defaultFormat)

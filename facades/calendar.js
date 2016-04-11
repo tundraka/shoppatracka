@@ -35,6 +35,15 @@ function getAuthInfo() {
     });
 }
 
+function getStartEnd(item) {
+    if (!item || !item.start || !item.end) {
+        return null;
+    }
+
+    if (item.start.dateTime) {
+    }
+}
+
 function getEvents() {
     return getAuthInfo().then((authInfo) => {
         calendarListConfiguration.auth = authInfo;

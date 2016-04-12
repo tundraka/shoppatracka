@@ -35,13 +35,35 @@ function getAuthInfo() {
     });
 }
 
-function getStartEnd(item) {
+function getPeriod(item) {
+    let period = {
+        valid: false,
+        start: 0,
+        end: 0
+    };
+
     if (!item || !item.start || !item.end) {
-        return null;
+        // TODO, log that we don't have the required data.
+        return period;
     }
 
-    if (item.start.dateTime) {
+    if (item.start.dateTime && item.end.dateTime) {
+        period.valid = true;
+        period.start = item.start.dateTime;
+        period.end = item.end.dateTime;
+    } else {
+        // TODO, log that we don't have the start or the end.
     }
+
+    if (item.start.date && item.end.date) {
+        period.valid = true;
+        period.start = item.start.date;
+        period.end = item.end.date;
+    } else {
+        // TODO, log that we don't have the start or the end.
+    }
+
+    return period;
 }
 
 function getEvents() {
@@ -59,12 +81,12 @@ function getEvents() {
         };
 
         response.items.forEach((item) => {
-            if (item.start.hasOwnProperty('dateTime')) {
-            }
+            let period = getPeriod(item);
 
             calendarResult.items.push({
                 summary: item.summary,
-                when: moment(item.start.dateTime, moment.ISO_8601).format(constants.dates.defaultFormat)
+                period,
+                when: moment(period.start, moment.ISO_8601).format(constants.dates.defaultFormat)
             });
         });
 

@@ -63,6 +63,12 @@ function getPeriod(item) {
         // TODO, log that we don't have the start or the end.
     }
 
+    let start = moment(period.start);
+    let end = moment(period.end);
+
+    period.length = end.to(start, true);
+    period.when = moment(period.start, moment.ISO_8601).format(constants.dates.defaultFormat);
+
     return period;
 }
 
@@ -85,8 +91,7 @@ function getEvents() {
 
             calendarResult.items.push({
                 summary: item.summary,
-                period,
-                when: moment(period.start, moment.ISO_8601).format(constants.dates.defaultFormat)
+                period
             });
         });
 
@@ -97,7 +102,7 @@ function getEvents() {
 getEvents().then((result) => {
     console.log(`${result.summary}:${result.description}`);
     result.items.forEach((item) => {
-        console.log(`${item.summary} on ${item.when}`);
+        console.log(`${item.summary} on ${item.period.when} (${item.period.length})`);
     });
 }).catch((err) => {
     console.log('auth error');

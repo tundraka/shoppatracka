@@ -49,24 +49,24 @@ function getPeriod(item) {
 
     if (item.start.dateTime && item.end.dateTime) {
         period.valid = true;
-        period.start = item.start.dateTime;
-        period.end = item.end.dateTime;
+        period.fullDay = false;
+        period.start = moment(item.start.dateTime);
+        period.end = moment(item.end.dateTime);
     } else {
         // TODO, log that we don't have the start or the end.
     }
 
     if (item.start.date && item.end.date) {
         period.valid = true;
-        period.start = item.start.date;
-        period.end = item.end.date;
+        period.fullDay = true;
+        period.totalDays = 
+        period.start = moment(item.start.date);
+        period.end = moment(item.end.date);
     } else {
         // TODO, log that we don't have the start or the end.
     }
 
-    let start = moment(period.start);
-    let end = moment(period.end);
-
-    period.length = end.to(start, true);
+    period.length = period.end.to(period.start, true);
     period.when = moment(period.start, moment.ISO_8601).format(constants.dates.defaultFormat);
 
     return period;

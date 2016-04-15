@@ -38,8 +38,12 @@ function getAuthInfo() {
 function getPeriod(item) {
     let period = {
         valid: false,
-        start: 0,
-        end: 0
+        fullDay: false,
+        start: null,
+        end: null,
+        totalDays: 0,
+        length: 0,
+        when: ''
     };
 
     if (!item || !item.start || !item.end) {
@@ -47,27 +51,32 @@ function getPeriod(item) {
         return period;
     }
 
+    // Date time
     if (item.start.dateTime && item.end.dateTime) {
         period.valid = true;
         period.fullDay = false;
         period.start = moment(item.start.dateTime);
         period.end = moment(item.end.dateTime);
+        period.when = moment(period.start, moment.ISO_8601).format(constants.dates.defaultFormat);
     } else {
         // TODO, log that we don't have the start or the end.
     }
 
+    // full days
     if (item.start.date && item.end.date) {
         period.valid = true;
         period.fullDay = true;
-        period.totalDays = 
         period.start = moment(item.start.date);
         period.end = moment(item.end.date);
+        // when totalDays == 1, no need to say how many days.
+        period.totalDays = period.end.diff(period.start, 'days');
+        period.when = moment(period.start, moment.ISO_8601).format(constants.dates.fullDay);
     } else {
         // TODO, log that we don't have the start or the end.
     }
 
     period.length = period.end.to(period.start, true);
-    period.when = moment(period.start, moment.ISO_8601).format(constants.dates.defaultFormat);
+    period.location = item.location || '';
 
     return period;
 }
@@ -102,7 +111,10 @@ function getEvents() {
 getEvents().then((result) => {
     console.log(`${result.summary}:${result.description}`);
     result.items.forEach((item) => {
-        console.log(`${item.summary} on ${item.period.when} (${item.period.length})`);
+        let periodLength = (item.totalDays && item.totalDays > 1)
+            ? item.period.length 
+            : '';
+        console.log(`${item.summary} on ${item.period.when} (${periodLength})`);
     });
 }).catch((err) => {
     console.log('auth error');

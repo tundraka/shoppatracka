@@ -4,7 +4,6 @@ const Promise = require('bluebird');
 const fs = Promise.promisifyAll(require('fs'));
 
 const constants = require('../utils/constants');
-const moment = require('moment');
 
 const events = Promise.promisifyAll(require('googleapis').calendar(constants.google.calendar.version).events);
 const googleAuth = require('google-auth-library');
@@ -17,7 +16,7 @@ const calendarListConfiguration = {
     orderBy: 'startTime'
 };
 
-const Item = require('../../models/calendar/item');
+const Item = require('../models/calendar/item');
 
 function getAuthInfo() {
     let creds = {};
@@ -62,10 +61,7 @@ function getEvents() {
 getEvents().then((result) => {
     console.log(`${result.summary}:${result.description}`);
     result.items.forEach((item) => {
-        let periodLength = (item.totalDays && item.totalDays > 1)
-            ? item.period.length 
-            : '';
-        console.log(`${item.summary} on ${item.period.when} (${periodLength})`);
+        console.log(item.toString());
     });
 }).catch((err) => {
     console.log('auth error');

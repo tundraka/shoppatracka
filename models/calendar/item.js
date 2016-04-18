@@ -1,5 +1,7 @@
 'use strict';
 
+// https://developers.google.com/google-apps/calendar/v3/reference/events#resource-representations
+
 const moment = require('moment');
 const constants = require('../../utils/constants');
 
@@ -8,6 +10,9 @@ class Item {
         this.name = item.summary || '';
         this.description = item.description || '';
         this.location = item.location || '';
+        this.htmlLink = item.htmlLink || '';
+        this.location = item.location || '';
+        this.recurring = item.hasOwnProperty('recurringEventId');
 
         if (item.start.date && item.end.date) {
             this.fullDay = true;

@@ -7,7 +7,10 @@ const constants = {
         calendar: {
             version: 'v3',
             calendarid: process.env.google_calendarid, // primary
-            scope: ['https://www.googleapis.com/auth/calendar.readonly']
+            scope: {
+                ro: ['https://www.googleapis.com/auth/calendar.readonly'],
+                rw: ['https://www.googleapis.com/auth/calendar']
+            }
         }
     },
     dates: {

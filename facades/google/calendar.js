@@ -1,12 +1,12 @@
 'use strict';
 
 const Promise = require('bluebird');
-const fs = Promise.promisifyAll(require('fs'));
 
-const constants = require('../utils/constants');
+const constants = require('../../utils/constants');
+const gAuth = require('./auth');
+const Item = require('../../models/calendar/item');
 
 const events = Promise.promisifyAll(require('googleapis').calendar(constants.google.calendar.version).events);
-const googleAuth = require('google-auth-library');
 const calendarListConfiguration = {
     auth: null, // define later
     calendarId: constants.google.calendar.calendarid,
@@ -16,28 +16,8 @@ const calendarListConfiguration = {
     orderBy: 'startTime'
 };
 
-const Item = require('../models/calendar/item');
-
-function getAuthInfo() {
-    let creds = {};
-
-    return fs.readFileAsync(constants.google.secret).then((content) => {
-        creds = JSON.parse(content);
-    }).then(() => {
-        return fs.readFileAsync(constants.google.tokens);
-    }).then((content) => {
-        const auth = new googleAuth();
-        let oauth2Client = new auth.OAuth2(creds.installed.client_id,
-                               creds.installed.client_secret,
-                               creds.installed.redirect_uris[0]);
-        oauth2Client.credentials = JSON.parse(content);
-
-        return oauth2Client;
-    });
-}
-
 function getEvents() {
-    return getAuthInfo().then((authInfo) => {
+    return gAuth.auth().then((authInfo) => {
         calendarListConfiguration.auth = authInfo;
         calendarListConfiguration.timeMin = (new Date()).toISOString();
 

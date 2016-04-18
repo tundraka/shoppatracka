@@ -20,7 +20,7 @@ const calendarListConfiguration = {
 function getEvents() {
     return gAuth.auth().then((authInfo) => {
         let start = moment();
-        let end = start.add(1, 'w');
+        let end = moment().add(1, 'w');
 
         calendarListConfiguration.auth = authInfo;
         calendarListConfiguration.timeMin = start.toJSON();

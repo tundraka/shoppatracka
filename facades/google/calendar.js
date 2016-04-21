@@ -43,16 +43,6 @@ function getEvents() {
     });
 }
 
-getEvents().then((result) => {
-    console.log(`${result.summary}:${result.description}`);
-    result.items.forEach((item) => {
-        console.log(item.toString());
-    });
-}).catch((err) => {
-    console.log('auth error');
-    console.log(err);
-});
-
 module.exports = {
     getEvents
 };

@@ -1,6 +1,8 @@
 'use strict';
 
-const SCOPES = ['https://www.googleapis.com/auth/calendar.readonly'];
+const constants = require('../utils/constats');
+
+const SCOPES = constants.google.calendar.scope.ro;
 var TOKEN_DIR = (process.env.HOME || process.env.HOMEPATH ||
     process.env.USERPROFILE) + '/.credentials/';
 var TOKEN_PATH = TOKEN_DIR + 'calendar-nodejs-quickstart.json';

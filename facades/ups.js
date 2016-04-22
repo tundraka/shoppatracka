@@ -2,13 +2,14 @@
 
 const Promise = require('bluebird');
 const UpsApi = require('shipping-ups');
+const constants = require('../utils');
 
 const upsApi = new UpsApi({
-    environment: 'live',
-    access_key: process.env.upsAccessKey,
-    username: process.env.upsUserName,
-    password: process.env.upsPassword,
-    user_agent: 'shoppatracka 0.1'
+    environment: constants.ups.env,
+    access_key: constants.ups.accesskey,
+    username: constants.ups.username,
+    password: constants.ups.password,
+    user_agent: constants.ups.ua
 });
 
 Promise.promisifyAll(upsApi);

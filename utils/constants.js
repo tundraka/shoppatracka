@@ -13,6 +13,13 @@ const constants = {
             }
         }
     },
+    ups: {
+        accesskey: process.env.upsAccessKey,
+        username: process.env.upsUserName,
+        password: process.env.upsPassword,
+        ua: 'shoppatracka 0.1',
+        env: 'live'
+    },
     dates: {
         defaultFormat: 'dddd [the] Do [at] LT', // "Sunday the 12th at 4:41 PM"
         fullDay: 'dddd [the] Do' // "Sunday the  12th"

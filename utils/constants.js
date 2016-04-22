@@ -20,6 +20,10 @@ const constants = {
         ua: 'shoppatracka 0.1',
         env: 'live'
     },
+    forecastio: {
+        key: process.env.forecastiokey,
+        timeout: 2500
+    },
     dates: {
         defaultFormat: 'dddd [the] Do [at] LT', // "Sunday the 12th at 4:41 PM"
         fullDay: 'dddd [the] Do' // "Sunday the  12th"

@@ -2,6 +2,7 @@
 
 const getBearingFromAngle = require('../utils/bearing');
 const temperature = require('../utils/temperature');
+const constants = require('../utils/constants');
 
 // ForecastIO: https://github.com/timelessvirtues/forecast.io-bluebird
 // DarkSky API: https://developer.forecast.io/docs/v2#forecast_call
@@ -9,8 +10,8 @@ const temperature = require('../utils/temperature');
 
 const ForecastIo = require('forecast.io-bluebird');
 const forecastIo = new ForecastIo({
-    key: process.env.forecastiokey,
-    timeout: 2500
+    key: constants.forecastio.key,
+    timeout: constants.forecastio.timeout
 });
 
 // What will be the temperature ~5pm?

@@ -27,6 +27,7 @@
     "google-auth-library": "^0.9.7",
     "googleapis": "^4.0.0",
     "moment": "^2.12.0",
+    "node-schedule": "^1.1.0",
     "shipping-ups": "^0.5.3"
   }
 }

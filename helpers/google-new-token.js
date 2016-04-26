@@ -1,11 +1,15 @@
 'use strict';
 
 const constants = require('../utils/constants');
+const path = require('path');
 
 const SCOPES = constants.google.calendar.scope.rw;
-var TOKEN_DIR = (process.env.HOME || process.env.HOMEPATH ||
-    process.env.USERPROFILE) + '/.credentials/';
-var TOKEN_PATH = TOKEN_DIR + 'calendar-nodejs-quickstart.json';
+const credentials = constants.google.tokens;
+const secret = constants.google.secret;
+const tokenDir = path.dirname(credentials);
+
+var TOKEN_DIR = tokenDir;
+var TOKEN_PATH = secret;
 
 const readline = require('readline');
 const fs = require('fs');

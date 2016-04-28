@@ -1,8 +1,7 @@
 'use strict';
 
-const getBearingFromAngle = require('../utils/bearing');
-const temperature = require('../utils/temperature');
 const constants = require('../utils/constants');
+const Forecast = require('../models/forecast');
 
 // ForecastIO: https://github.com/timelessvirtues/forecast.io-bluebird
 // DarkSky API: https://developer.forecast.io/docs/v2#forecast_call
@@ -23,14 +22,9 @@ const forecastIo = new ForecastIo({
 
 function getCurrentForecast(coordinates) {
     return forecastIo.fetch(coordinates.lat, coordinates.lng).then((result) => {
-        let description = result.hourly.summary;
-        let farenheit = result.currently.temperature;
-        let celsius = Math.round(temperature.f2c(farenheit));
-        let windSpeed = result.currently.windSpeed;
-        let windDirection = result.currently.windBearing;
-        let bearingName = getBearingFromAngle(windDirection);
+        let forecast = new Forecast(result);
         
-        return `It is ${farenheit} F (${celsius} C), ${description} Wind speed of ${windSpeed} mph ${bearingName}`;
+        return forecast.toString();
     });
 }
 

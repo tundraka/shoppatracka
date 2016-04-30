@@ -16,7 +16,7 @@ function startBot() {
     let shoppatracka = Botkit.slackbot(botOptions);
 
     shoppatracka.spawn({
-        token: constants.slack.token
+        token: constants.get('slack.token')
     }).startRTM((err) => {
         if (err) {
             throw new Error(err);

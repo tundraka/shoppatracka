@@ -5,11 +5,11 @@ const UpsApi = require('shipping-ups');
 const constants = require('../utils');
 
 const upsApi = new UpsApi({
-    environment: constants.ups.env,
-    access_key: constants.ups.accesskey,
-    username: constants.ups.username,
-    password: constants.ups.password,
-    user_agent: constants.ups.ua
+    environment: constants.get('ups.env'),
+    access_key: constants.get('ups.accesskey'),
+    username: constants.get('ups.username'),
+    password: constants.get('ups.password'),
+    user_agent: constants.get('ups.ua')
 });
 
 Promise.promisifyAll(upsApi);

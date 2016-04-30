@@ -1,5 +1,7 @@
 'use strict';
 
+const resolvePath = require('object-resolve-path');
+
 const constants = {
     google: {
         tokens: process.env.google_token,
@@ -33,4 +35,10 @@ const constants = {
     }
 };
 
-module.exports = constants;
+function get(path) {
+    return resolvePath(constants, path);
+}
+
+module.exports = {
+    get
+};

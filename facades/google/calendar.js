@@ -7,12 +7,12 @@ const constants = require('../../utils/constants');
 const gAuth = require('./auth');
 const Item = require('../../models/calendar/item');
 
-const events = Promise.promisifyAll(require('googleapis').calendar(constants.google.calendar.version).events);
+const events = Promise.promisifyAll(require('googleapis').calendar(constants.get('google.calendar.version')).events);
 const calendarListConfiguration = {
     auth: null, // define later
     timeMin: null,
     timeMax: null,
-    calendarId: constants.google.calendar.calendarid,
+    calendarId: constants.get('google.calendar.calendarid'),
     singleEvents: true,
     orderBy: 'startTime'
 };

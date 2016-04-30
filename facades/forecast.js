@@ -9,8 +9,8 @@ const Forecast = require('../models/forecast');
 
 const ForecastIo = require('forecast.io-bluebird');
 const forecastIo = new ForecastIo({
-    key: constants.forecastio.key,
-    timeout: constants.forecastio.timeout
+    key: constants.get('forecastio.key'),
+    timeout: constants.get('forecastio.timeout')
 });
 
 // What will be the temperature ~5pm?

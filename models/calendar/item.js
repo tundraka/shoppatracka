@@ -45,8 +45,8 @@ class Item {
      */
     startString() {
         return this.fullDay
-            ? moment(this.start, moment.ISO_8601).format(constants.dates.fullDay)
-            : moment(this.start, moment.ISO_8601).format(constants.dates.defaultFormat);
+            ? moment(this.start, moment.ISO_8601).format(constants.get('dates.fullDay'))
+            : moment(this.start, moment.ISO_8601).format(constants.get('dates.defaultFormat'));
     }
 
     /**

@@ -61,7 +61,7 @@ function storeToken(token) {
             throw err;
         }
     }
-    fs.writeFile(TOKEN_DIR, JSON.stringify(token));
-    console.log('Token stored to ' + TOKEN_DIR);
+    fs.writeFile(credentials, JSON.stringify(token));
+    console.log('Token stored to ' + credentials);
 }
 

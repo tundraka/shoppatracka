@@ -3,19 +3,17 @@
 const constants = require('../utils/constants');
 const path = require('path');
 
-const SCOPES = constants.google.calendar.scope.rw;
-const credentials = constants.google.tokens;
-const secret = constants.google.secret;
+const SCOPES = constants.get('google.calendar.scope.rw');
+const credentials = constants.get('google.tokens');
 const tokenDir = path.dirname(credentials);
 
 var TOKEN_DIR = tokenDir;
-var TOKEN_PATH = secret;
 
 const readline = require('readline');
 const fs = require('fs');
 const googleAuth = require('google-auth-library');
 const auth = new googleAuth();
-const secret = require('client_secret.json');
+const secret = require(constants.get('google.secret'));
 
 const clientId = secret.installed.client_id;
 const clientSecret = secret.installed.client_secret;
@@ -63,7 +61,7 @@ function storeToken(token) {
             throw err;
         }
     }
-    fs.writeFile(TOKEN_PATH, JSON.stringify(token));
-    console.log('Token stored to ' + TOKEN_PATH);
+    fs.writeFile(TOKEN_DIR, JSON.stringify(token));
+    console.log('Token stored to ' + TOKEN_DIR);
 }
 

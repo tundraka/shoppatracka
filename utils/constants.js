@@ -40,5 +40,5 @@ function get(path) {
 }
 
 module.exports = {
-    get
+    get: get
 };

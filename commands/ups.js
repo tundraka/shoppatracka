@@ -3,7 +3,7 @@
 const ups = require('../facades/ups');
 
 module.exports = {
-    patterns: ['track (\w)$'],
+    patterns: ['track (.+)$'],
     messageType: ['direct_message', 'direct_mention', 'mention'],
     callback: (bot, message) => {
         let trackingNumber = message.match[1];

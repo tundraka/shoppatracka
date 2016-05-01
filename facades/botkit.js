@@ -4,14 +4,6 @@ const Botkit = require('botkit');
 const botOptions = {debug: false};
 const constants = require('../utils/constants');
 
-function validateParams() {
-    // TODO. update
-    if (!process.env.token || !process.env.forecastiokey) {
-        console.log('Error: Specify: token | forecastiokey. In environment');
-        process.exit(1);
-    }
-}
-
 function startBot() {
     let shoppatracka = Botkit.slackbot(botOptions);
 
@@ -27,7 +19,6 @@ function startBot() {
 }
 
 function start() {
-    validateParams();
     return startBot();
 }
 

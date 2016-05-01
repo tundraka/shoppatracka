@@ -2,7 +2,7 @@
 
 const Promise = require('bluebird');
 const UpsApi = require('shipping-ups');
-const constants = require('../utils');
+const constants = require('../utils/constants');
 
 const upsApi = new UpsApi({
     environment: constants.get('ups.env'),

@@ -6,7 +6,7 @@ const moment = require('moment');
 
 function init(bot) {
     schedule.scheduleJob('* * */1 * * *', () => {
-        bot.startPrivateConversation({user: constants.slack.user}, (err, convo) => {
+        bot.startPrivateConversation({user: constants.get('slack.user')}, (err, convo) => {
             if (err) {
                 // TODO logs?
                 return;

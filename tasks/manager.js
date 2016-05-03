@@ -1,11 +1,12 @@
 'use strict';
 
 const schedule = require('node-schedule');
+const constants = require('../utils/constants');
 const moment = require('moment');
 
 function init(bot) {
     schedule.scheduleJob('* * */1 * * *', () => {
-        bot.startPrivateConversation({user: 'jeziel'}, (err, convo) => {
+        bot.startPrivateConversation({user: constants.slack.user}, (err, convo) => {
             if (err) {
                 // TODO logs?
                 return;

@@ -8,5 +8,6 @@ upsUserName=username \
 upsPassword='token' \
 # Other
 slack_token=token \
+slack_user=user \
 forecastiokey=token \
 pm2 start shoppatracka.js

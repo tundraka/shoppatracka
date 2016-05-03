@@ -4,7 +4,7 @@ const Botkit = require('botkit');
 const botOptions = {debug: false};
 const constants = require('../utils/constants');
 
-function startBot() {
+function start() {
     let shoppatracka = Botkit.slackbot(botOptions);
 
     shoppatracka.spawn({
@@ -16,10 +16,6 @@ function startBot() {
     });
 
     return shoppatracka;
-}
-
-function start() {
-    return startBot();
 }
 
 module.exports = {

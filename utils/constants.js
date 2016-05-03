@@ -27,7 +27,8 @@ const constants = {
         timeout: 2500
     },
     slack: {
-        token: process.env.slack_token
+        token: process.env.slack_token,
+        user: process.env.slack_user
     },
     dates: {
         defaultFormat: 'dddd [the] Do [at] LT', // "Sunday the 12th at 4:41 PM"

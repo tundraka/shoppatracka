@@ -29,6 +29,7 @@
     "moment": "^2.12.0",
     "node-schedule": "^1.1.0",
     "object-resolve-path": "^1.1.1",
-    "shipping-ups": "^0.5.3"
+    "shipping-ups": "^0.5.3",
+    "winston": "^2.2.0"
   }
 }

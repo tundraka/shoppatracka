@@ -33,6 +33,9 @@ const constants = {
     dates: {
         defaultFormat: 'dddd [the] Do [at] LT', // "Sunday the 12th at 4:41 PM"
         fullDay: 'dddd [the] Do' // "Sunday the  12th"
+    },
+    globals: {
+        loghome: process.env.logs
     }
 };
 

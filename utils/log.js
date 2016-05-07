@@ -19,7 +19,7 @@ function getLogConf(loggerName) {
 }
 
 function getLog(loggerName) {
-    return () => {
+    return (() => {
         let log = getLogConf(loggerName)
 
         return {
@@ -27,8 +27,12 @@ function getLog(loggerName) {
             warn: log.warn,
             error: log.error
         }
-    };
+    })();
 }
+
+let a = getLog('a');
+console.log(a);
+a.info('aoeu');
 
 module.exports = {
     getLog

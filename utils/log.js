@@ -30,10 +30,6 @@ function getLog(loggerName) {
     })();
 }
 
-let a = getLog('a');
-console.log(a);
-a.info('aoeu');
-
 module.exports = {
     getLog
 };

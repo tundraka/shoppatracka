@@ -1,8 +1,14 @@
 'use strict';
 
-const shoppatracka = require('./facades/botkit').start();
+const botkit = require('./facades/botkit');
 const commands = require('./commands/manager');
-//const tasks = require('./tasks/manager');
+const tasks = require('./tasks/manager');
+const log = require('../utils/log').getLog('main');
 
-commands.init(shoppatracka);
-//tasks.init(shoppatracka);
+botkit.start().then((shoppatracka) => {
+    log.info('bot started');
+    commands.init(shoppatracka);
+    tasks.init(shoppatracka);
+}).catch((err) => {
+    log.error('Unable to start botkit', JSON.stringify(err));
+});

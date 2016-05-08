@@ -1,21 +1,26 @@
 'use strict';
 
 const Botkit = require('botkit');
-const botOptions = {debug: false};
 const constants = require('../utils/constants');
+const Promise = require('bluebird');
 
 function start() {
-    let shoppatracka = Botkit.slackbot(botOptions);
+    return new Promise((resolve, reject) => {
+        let shoppatracka = Botkit.slackbot({
+            debug: constants.get('botkit.debug')
+        });
 
-    shoppatracka.spawn({
-        token: constants.get('slack.token')
-    }).startRTM((err) => {
-        if (err) {
-            throw new Error(err);
-        }
+        shoppatracka.spawn({
+            token: constants.get('slack.token')
+        }).startRTM((err) => {
+            if (err) {
+                reject(new Error(err));
+                return;
+            }
+
+            resolve(shoppatracka);
+        });
     });
-
-    return shoppatracka;
 }
 
 module.exports = {

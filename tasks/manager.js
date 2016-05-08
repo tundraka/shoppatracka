@@ -7,7 +7,7 @@ const moment = require('moment');
 function init(bot) {
     schedule.scheduleJob('* * */1 * * *', () => {
         let now = moment().format();
-        bot.say(`I am here, it's ${now}`);
+        //bot.say(`I am here, it's ${now}`);
     });
 }
 

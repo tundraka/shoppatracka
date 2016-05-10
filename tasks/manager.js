@@ -1,12 +1,13 @@
 'use strict';
 
 const schedule = require('node-schedule');
-const constants = require('../utils/constants');
-const moment = require('moment');
+//const moment = require('moment');
+const log = require('../utils/log').getLog('task.manager');
 
-function init(bot) {
+function init() {
     schedule.scheduleJob('* * */1 * * *', () => {
-        let now = moment().format();
+        log.info('I am here.');
+        //let now = moment().format();
         //bot.say(`I am here, it's ${now}`);
     });
 }

@@ -4,7 +4,6 @@ const winston = require('winston');
 const constants = require('./constants');
 const logHome = constants.get('globals.loghome')
 
-//winston.add(winston.transports.File, {filename: './o.log'});
 winston.add(winston.transports.File, {filename: `${logHome}/stdout.log`});
 winston.remove(winston.transports.Console);
 

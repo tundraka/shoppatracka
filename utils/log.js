@@ -17,11 +17,6 @@ const defaultConf = {
     }
 };
 
-//function getLogConf(loggerName) {
-    //winston.loggers.add(loggerName, defaultConf);
-    //return winston.loggers.get(loggerName);
-//}
-
 function getLog(loggerName) {
     return (() => {
         let log = winston.loggers.get(loggerName);

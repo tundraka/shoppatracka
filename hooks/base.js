@@ -7,6 +7,10 @@ const payload = {
     text: ''
 };
 
+// NOTES: 
+// Links in the webhook, after the pipe is
+// <https://alert-system.com/alerts/1234|Click here>
+
 function sendHook() {
 }
 

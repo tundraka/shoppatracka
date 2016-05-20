@@ -28,7 +28,13 @@ const constants = {
     },
     slack: {
         token: process.env.slack_token,
-        user: process.env.slack_user
+        user: process.env.slack_user,
+        webhooks: {
+            baseurl: 'https://hooks.slack.com/services',
+            hooks: {
+                santo: process.env.slack_webhook_santo
+            }
+        }
     },
     botkit: {
         debug: process.env.botkit_debug

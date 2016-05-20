@@ -12,7 +12,7 @@ function start() {
             url: santo // only 1 webhook
         });
 
-        let shoppatracka = shoppatrackaController.spawn({
+        shoppatrackaController.spawn({
             token: constants.get('slack.token')
         }).startRTM((err) => {
             if (err) {
@@ -20,7 +20,7 @@ function start() {
                 return;
             }
 
-            resolve(shoppatracka);
+            resolve(shoppatrackaController);
         });
     });
 }

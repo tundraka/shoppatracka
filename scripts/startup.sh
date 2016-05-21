@@ -10,6 +10,7 @@ upsPassword='token' \
 slack_token=token \
 slack_user=user \
 slack_webhook_santo=santo \
+slack_default_channel=channel \
 botkit_debug=false \
 forecastiokey=token \
 logs=path \

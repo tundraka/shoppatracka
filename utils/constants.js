@@ -29,6 +29,7 @@ const constants = {
     slack: {
         token: process.env.slack_token,
         user: process.env.slack_user,
+        defaultchannel: process.env.slack_default_channel,
         webhooks: {
             baseurl: 'https://hooks.slack.com/services',
             hooks: {

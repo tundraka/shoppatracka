@@ -4,15 +4,16 @@ const Botkit = require('botkit');
 const constants = require('../utils/constants');
 const Promise = require('bluebird');
 const santo = require('../urls/santo');
+const BotkitModel = require('../models/botkit');
 
 function start() {
     return new Promise((resolve, reject) => {
-        let shoppatrackaController = Botkit.slackbot({
+        let controller = Botkit.slackbot({
             debug: constants.get('botkit.debug'),
             url: santo // only 1 webhook
         });
 
-        shoppatrackaController.spawn({
+        let bot = controller.spawn({
             token: constants.get('slack.token')
         }).startRTM((err) => {
             if (err) {
@@ -20,7 +21,7 @@ function start() {
                 return;
             }
 
-            resolve(shoppatrackaController);
+            resolve(new BotkitModel(controller, bot));
         });
     });
 }

@@ -38,7 +38,7 @@ const constants = {
         }
     },
     botkit: {
-        debug: process.env.botkit_debug
+        debug: getBoolean(process.env.botkit_debug)
     },
     dates: {
         defaultFormat: 'dddd [the] Do [at] LT', // "Sunday the 12th at 4:41 PM"
@@ -48,6 +48,10 @@ const constants = {
         loghome: process.env.logs
     }
 };
+
+function getBoolean(value) {
+    return value === 'true';
+}
 
 function get(path) {
     return resolvePath(constants, path);

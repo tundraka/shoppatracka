@@ -16,9 +16,6 @@ const forecastIo = new ForecastIo({
 // What will be the temperature ~5pm?
 // What's the weather like right now
 // How's the weather his weekend
-//
-// {It'll be | it is} 45F (35C), clear throughout the day, wind speed of 3.69 towards the
-// North
 
 function getCurrentForecast(coordinates) {
     return forecastIo.fetch(coordinates.lat, coordinates.lng).then((result) => {

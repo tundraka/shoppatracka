@@ -1,16 +1,19 @@
 'use strict';
 
 const schedule = require('node-schedule');
-const moment = require('moment');
-const log = require('../utils/log').getLog('task.manager');
 const baseHook = require('../hooks/base');
+const tasks = [
+    {
+        time: {hour: 5, minute: 0},
+        task: () => {
+            baseHook.sendHook();
+        }
+    }
+];
 
 function init() {
-    schedule.scheduleJob({hour: 5, minute: 0}, () => {
-        let now = moment().format();
-
-        log.info(`I am here ${now}`);
-        baseHook.sendHook();
+    tasks.forEach((task) => {
+        schedule.scheduleJob(task.time, task.task);
     });
 }
 

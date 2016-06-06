@@ -1,7 +1,6 @@
 'use strict';
 
 const Promise = require('bluebird');
-const moment = require('moment');
 
 const constants = require('../../utils/constants');
 const gAuth = require('./auth');
@@ -17,11 +16,8 @@ const calendarListConfiguration = {
     orderBy: 'startTime'
 };
 
-function getEvents() {
+function getEvents(start, end) {
     return gAuth.auth().then((authInfo) => {
-        let start = moment();
-        let end = moment().add(1, 'w');
-
         calendarListConfiguration.auth = authInfo;
         calendarListConfiguration.timeMin = start.toJSON();
         calendarListConfiguration.timeMax = end.toJSON();

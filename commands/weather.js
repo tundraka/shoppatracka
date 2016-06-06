@@ -7,7 +7,7 @@ module.exports = {
     patterns: ['weather'],
     messageType: ['direct_message', 'direct_mention', 'mention'],
     callback: (bot, message) => {
-        var coordinates = location.getCoordinatesByPlaceName('austin');
+        let coordinates = location.getCoordinatesByPlaceName('austin');
 
         bot.reply(message, 'Working on it!');
 

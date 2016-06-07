@@ -1,15 +1,16 @@
 'use strict';
 
-const location = require('../facades/location');
 const weather = require('../facades/forecast');
-const base = require('../hooks/base');
+const baseWebHook = require('../hooks/base');
 
 module.exports = {
-    time: {hour: [7, 17], minute: 0, dayOfWeek: 4},
+    time: {hour: [7, 17], minute: 0},
     task: () => {
-        let coordinates = location.getCoordinatesByPlaceName('austin');
-        weather.getCurrentForecast(coordinates).then((result) => {
-            base.sendHook(result);
+        weather.getCurrentForecast('austin').then((result) => {
+            // the webhook (santo), should it be an extra param of sendHook?
+            // Santo, and any other webhook will have the same implementation
+            // that we have in base.
+            baseWebHook.sendHook(result);
         });
     }
 };

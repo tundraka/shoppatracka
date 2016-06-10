@@ -1,7 +1,7 @@
 'use strict';
 
 const weather = require('../facades/forecast');
-const baseWebHook = require('../hooks/base');
+const santo = require('../hooks/santo');
 
 module.exports = {
     time: {hour: [7, 17], minute: 0},
@@ -10,7 +10,7 @@ module.exports = {
             // the webhook (santo), should it be an extra param of sendHook?
             // Santo, and any other webhook will have the same implementation
             // that we have in base.
-            baseWebHook.sendHook(result);
+            santo.send(result);
         });
     }
 };

@@ -4,7 +4,7 @@ const calendar = require('../utils/calendarEvents');
 const santo = require('../hooks/santo');
 
 module.exports = {
-    times: {dayOfWeek: 0, hour: 19, minute: 30},
+    time: {dayOfWeek: 0, hour: 19, minute: 30},
     task: () => {
         calendar.getNextWeekEvents().then((events) => {
             if (Array.isArray(events) && events.length > 0) {

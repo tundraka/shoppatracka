@@ -1,18 +1,16 @@
 'use strict';
 
 const schedule = require('node-schedule');
-const baseHook = require('../hooks/base');
 
+// tasks
 const weather = require('./weather');
+const weekly = require('./weekly');
+const daily = require('./daily');
 
 const tasks = [
-    {
-        time: {hour: 5, minute: 0},
-        task: () => {
-            baseHook.sendHook();
-        }
-    },
-    weather
+    weather,
+    weekly,
+    daily
 ];
 
 function init() {

@@ -17,7 +17,9 @@ const tasks = [
 
 function init() {
     tasks.forEach((task) => {
-        schedule.scheduleJob(task.time, task.task);
+        task.times.forEach((time) => {
+            schedule.scheduleJob(task.time, task.task);
+        });
     });
 }
 

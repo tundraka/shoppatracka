@@ -12,7 +12,7 @@ function getNextWeekEvents() {
 
 function getTodaysEvents() {
     let start = moment();
-    let end = moment.endOf('day');
+    let end = moment().endOf('day');
 
     return calendar.getEvents(start, end);
 }

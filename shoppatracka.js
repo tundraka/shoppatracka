@@ -8,7 +8,7 @@ const log = require('./utils/log').getLog('main');
 botkit.start().then((shoppatracka) => {
     log.info('bot started');
     commands.init(shoppatracka.controller);
-    tasks.init(shoppatracka.bot);
+    tasks.init();
 }).catch((err) => {
     log.error('Unable to start botkit', JSON.stringify(err));
 });

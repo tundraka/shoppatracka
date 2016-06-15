@@ -1,10 +1,17 @@
 {
     "root": true,
-    "extends": "eslint:recommended",
+    "extends": [
+        "eslint:recommended",
+        "plugin:jasmine/recommended"
+    ]
+    "plugins": [
+        "jasmine"
+    ],
     "env": {
         "browser": true,
         "node": true,
-        "es6": true
+        "es6": true,
+        "jasmine": true
     },
     "rules": {
         "no-unexpected-multiline": 2,

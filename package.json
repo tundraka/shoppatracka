@@ -34,5 +34,8 @@
     "sequelize": "^3.23.1",
     "shipping-ups": "^0.5.3",
     "winston": "^2.2.0"
+  },
+  "devDependencies": {
+    "eslint-plugin-jasmine": "^1.8.1"
   }
 }

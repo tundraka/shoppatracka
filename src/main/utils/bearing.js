@@ -8,7 +8,7 @@ const topDegree = 360;
 
 module.exports = function getBearingFromAngle(bearing) {
     if (bearing < 0 || bearing > topDegree) {
-        return `I don't know about (${bearing}?)`;
+        return `I don't know about bearing ${bearing}.`;
     }
 
     return names[bearings[Math.floor(bearing / angleDivision)]];

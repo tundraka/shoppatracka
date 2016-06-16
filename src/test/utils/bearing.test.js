@@ -1,6 +1,6 @@
 'use strict';
 
-let bearing = require('../../main/utils/bearing');
+const bearing = require('../../main/utils/bearing');
 
 const lowerRange = -1;
 const upperRange = 361;

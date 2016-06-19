@@ -14,6 +14,6 @@ describe('calendarEvents', () => {
         var b = dates[1];
         
         expect(a).not.toEqual(b);
-        //expect(b.diff(a, 'weeks')).toBe(1);
+        expect(b.diff(a, 'week')).toBe(1);
     });
 });

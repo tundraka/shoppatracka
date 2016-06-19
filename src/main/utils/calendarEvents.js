@@ -5,7 +5,7 @@ const calendar = require('../facades/google/calendar');
 
 function getNextWeekEvents() {
     let start = moment().add(1, 'day').startOf('day');
-    let end = moment().add(1, 'week');
+    let end = moment().add(1, 'day').add(1, 'week');
 
     return calendar.getEvents(start, end);
 }

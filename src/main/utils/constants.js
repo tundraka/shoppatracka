@@ -46,11 +46,23 @@ const constants = {
     },
     globals: {
         loghome: process.env.logs
+    },
+    test: {
+        valueStr: 'value',
+        valueObj: {a: 1},
+        bool: {
+            t: getBoolean('true'),
+            t1: true,
+            f: getBoolean('false'),
+            f1: getBoolean('TRUE'),
+            f2: getBoolean('whats'),
+            f3: getBoolean(1)
+        },
     }
 };
 
 function getBoolean(value) {
-    return value === 'true';
+    return 'true' === value ;
 }
 
 function get(path) {

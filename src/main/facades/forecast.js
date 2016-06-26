@@ -22,7 +22,7 @@ function getCurrentForecast(place) {
     let coordinates = location.getCoordinatesByPlaceName(place); // location
     return forecastIo.fetch(coordinates.lat, coordinates.lng).then((result) => {
         let forecast = new Forecast(result);
-        
+
         return forecast.toString();
     });
 }

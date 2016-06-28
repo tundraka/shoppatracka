@@ -2,6 +2,7 @@
 
 const forecast = require('../../main/facades/forecast');
 const location = require('../../main/facades/location');
+const constants = require('../../main/utils/constants');
 
 describe('Forecast', () => {
     it('call coordinates', function() {

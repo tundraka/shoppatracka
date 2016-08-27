@@ -23,6 +23,7 @@
   "dependencies": {
     "bluebird": "^3.3.4",
     "botkit": "0.0.7",
+    "dotenv": "^2.0.0",
     "forecast.io-bluebird": "0.0.1",
     "google-auth-library": "^0.9.7",
     "googleapis": "^4.0.0",

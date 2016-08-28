@@ -1,5 +1,6 @@
 'use strict';
 
+require('dotenv').config();
 const botkit = require('./facades/botkit');
 const commands = require('./commands/manager');
 const tasks = require('./tasks/manager');

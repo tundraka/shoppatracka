@@ -1,12 +1,10 @@
 'use strict';
 
 const weather = require('./weather');
-const ups = require('./ups');
 const calendar = require('./calendar');
 
 const commands = [
     weather,
-    ups,
     calendar
 ];
 
